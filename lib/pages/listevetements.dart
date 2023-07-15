@@ -17,9 +17,9 @@ class _listevetementsState extends State<listevetements> {
   @override
   Widget build(BuildContext context) {
     final user=FirebaseAuth.instance.currentUser;
-    String? name=user?.email;
-    name=name?.replaceAll("smurf1@gmail.com","").toUpperCase();
-    print(name);
+
+    // String? name=user?.email;
+    // name=name?.replaceAll("smurf1@gmail.com","").toUpperCase();
     data=  ModalRoute.of(context)!.settings.arguments as List<String>;
     return Scaffold(
 

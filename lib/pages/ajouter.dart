@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyForm extends StatefulWidget {
@@ -11,8 +12,7 @@ class _MyFormState extends State<MyForm> {
   String? _type='';
   String? _color='';
   String? _occasion='';
-  int     _counter=0;
-
+  final user=FirebaseAuth.instance.currentUser?.email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,17 +127,17 @@ class _MyFormState extends State<MyForm> {
 
   }
   Future Createvete({required String color ,required String type ,required String occasion}) async{
-    _counter++;
-    final docvet = FirebaseFirestore.instance.collection('vetements').doc(_counter.toString());
+    final docvet = FirebaseFirestore.instance.collection('vetements').doc();
     final data={
       'couleur': color,
+      'email':user,
       'type':type,
       'occasion':occasion,
 
     };
     await docvet.set(data);
 
-    }
+  }
 }
 
 
