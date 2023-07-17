@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:arm/pages/item_details.dart';
 import 'package:arm/pages/ajouter.dart';
@@ -7,7 +8,7 @@ class ItemList extends StatelessWidget {
   ItemList({Key? key}) : super(key: key) {
     _stream = _reference.snapshots();
   }
-
+  final user=FirebaseAuth.instance.currentUser;
   CollectionReference _reference =
   FirebaseFirestore.instance.collection('vetements');
 
@@ -36,32 +37,35 @@ class ItemList extends StatelessWidget {
             List<QueryDocumentSnapshot> documents = querySnapshot.docs;
 
             //Convert the documents to Maps
-            List<Map> items = documents.map((e) => e.data() as Map).toList();
+            List<Map> items = documents.map((e) => e.data() as Map).where((element) => element['email']==user?.email).toList();
 
             //Display the list
             return ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  //Get the item at this index
-                  Map thisItem = items[index];
-                  //REturn the widget for the list items
-                  return ListTile(
-                    title: Text('${thisItem['type']}'),
-                    subtitle: Row(
-                      children: [
-                        Text('${thisItem['occasion']}'),
-                        Text('${thisItem['couleur']}'),
-                      ],
-                    ),
-                    leading: Container(
-                      height: 80,
-                      width: 80,
-                      child: thisItem.containsKey('image') ? Image.network(
-                          '${thisItem['image']}') : Container(),
-                    ),
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //Get the item at this index
+                    Map thisItem = items[index];
+                    //REturn the widget for the list items
+
+                    return ListTile(
+                      title: Text('${thisItem['type']}'),
+                      subtitle: Row(
+                        children: [
+                          Text('${thisItem['occasion']}'),
+                          Text('${thisItem['couleur']}'),
+                        ],
+                      ),
+                      leading: Container(
+                        height: 80,
+                        width: 80,
+                        child: thisItem.containsKey('image') ? Image.network(
+                            '${thisItem['image']}') : Container(),
+                      ),
+
+                    );
+                    }
 
                   );
-                });
           }
 
           //Show loader
