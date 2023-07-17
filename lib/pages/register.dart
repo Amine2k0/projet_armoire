@@ -108,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future Createuser(
       {required String nom, required String prenom, required String ville, required String email}) async {
-    final docvet = FirebaseFirestore.instance.collection('users').doc();
+    final docvet = FirebaseFirestore.instance.collection('users').doc(email);
     final data = {
       'email': email,
       'nom': nom,

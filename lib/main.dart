@@ -19,7 +19,7 @@ void main(){
       '/login/':(context)=> SignInScreen(),
       '/register/':(context)=>SignUpScreen(),
       '/home':(context)=>home(),
-      '/listevetements':(context)=>listevetements(),
+      '/listevetements':(context)=>ItemList(),
       '/ajouter':(context)=>MyForm(),
     },
 

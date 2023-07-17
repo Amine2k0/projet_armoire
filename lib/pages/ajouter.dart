@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class MyForm extends StatefulWidget {
   @override
@@ -13,6 +18,7 @@ class _MyFormState extends State<MyForm> {
   String? _color='';
   String? _occasion='';
   final user=FirebaseAuth.instance.currentUser?.email;
+  String imageUrl='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +30,7 @@ class _MyFormState extends State<MyForm> {
       body: Form(
         key: _formKey,
         child: Container(
-          margin: EdgeInsets.only(top: 35),
+          margin: EdgeInsets.only(top: 25),
           child: Column(
             children: <Widget>[
               TextFormField(
@@ -50,7 +56,7 @@ class _MyFormState extends State<MyForm> {
                 },
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               TextFormField(
                 style: TextStyle(color: Colors.grey.withOpacity(0.9)),
@@ -75,7 +81,7 @@ class _MyFormState extends State<MyForm> {
                 },
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               TextFormField(
                 style: TextStyle(color: Colors.grey.withOpacity(0.9)),
@@ -99,13 +105,48 @@ class _MyFormState extends State<MyForm> {
                   _occasion = value;
                 },
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 10.0),
+              IconButton(onPressed: () async{
+
+                ImagePicker imagePicker=ImagePicker();
+                XFile? file=await imagePicker.pickImage(source: ImageSource.camera );
+                print(file?.path);
+                if(file?.path==null) return;
+                String filename=DateTime.now().microsecondsSinceEpoch.toString();
+                Reference referenceRoot=FirebaseStorage.instance.ref();
+                Reference referenceDir=referenceRoot.child('images');
+                Reference referenceuploadimage=referenceDir.child(filename);
+               try{
+                 await referenceuploadimage.putFile(File(file!.path));
+                 imageUrl=await referenceuploadimage.getDownloadURL();
+                 ScaffoldMessenger.of(context).showSnackBar(
+                     SnackBar(content: Text('image uploaded'),));
+
+               }catch(e){
+                   print(e.toString());
+               }
+
+
+
+              }, icon: Icon(Icons.camera_alt)),
+              SizedBox(height: 10,),
               ElevatedButton(
                 onPressed: () {
+                  if(imageUrl.isEmpty){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('please upload an image'),));
+                    return;
+                  }
                   if (_formKey.currentState?.validate() ?? false) {
                     _formKey.currentState?.save();
-                   Createvete(color: _color.toString(), type: _type.toString(), occasion: _occasion.toString());
+                   Createvete(
+                       color: _color.toString(),
+                       type: _type.toString(),
+                       occasion: _occasion.toString(),
+                       image: imageUrl,
+                   );
                   }
+                  Navigator.pop(context);
                 },
                 child: Text('Submit'),
                 style: ButtonStyle(
@@ -126,13 +167,14 @@ class _MyFormState extends State<MyForm> {
     );
 
   }
-  Future Createvete({required String color ,required String type ,required String occasion}) async{
+  Future Createvete({required String color ,required String type ,required String occasion,required String image}) async{
     final docvet = FirebaseFirestore.instance.collection('vetements').doc();
     final data={
       'couleur': color,
       'email':user,
       'type':type,
       'occasion':occasion,
+      'image':image,
 
     };
     await docvet.set(data);
