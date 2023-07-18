@@ -30,141 +30,141 @@ class _MyFormState extends State<MyForm> {
       body: Form(
         key: _formKey,
         child: Container(
-          margin: EdgeInsets.only(top: 25),
+          margin: EdgeInsets.only(top: 15),
           child: Column(
-            children: <Widget>[
-              TextFormField(
-                style: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                decoration: InputDecoration(
-                  labelText: 'input',
-                  labelStyle: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                  filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.grey.withOpacity(0.3),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+              children: <Widget>[
+                TextFormField(
+                  style: TextStyle(color: Colors.grey.withOpacity(0.9)),
+                  decoration: InputDecoration(
+                    labelText: 'input',
+                    labelStyle: TextStyle(color: Colors.grey.withOpacity(0.9)),
+                    filled: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.grey.withOpacity(0.3),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+                  ),
+                  validator: (value) {
+                    if (value?.isEmpty ?? false) {
+                      return 'Please enter a type';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _type = value;
+                  },
                 ),
-                validator: (value) {
-                  if (value?.isEmpty ?? false) {
-                    return 'Please enter a type';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _type = value;
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                style: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                decoration: InputDecoration(
-                  labelText: 'color',
-                  labelStyle: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                  filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.grey.withOpacity(0.3),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+                const SizedBox(
+                  height: 9,
                 ),
-                validator: (value) {
-                  if (value?.isEmpty ?? false) {
-                    return 'Please enter a color';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _color = value;
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                style: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                decoration: InputDecoration(
-                  labelText: 'occasion',
-                  labelStyle: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                  filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: Colors.grey.withOpacity(0.3),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+                TextFormField(
+                  style: TextStyle(color: Colors.grey.withOpacity(0.9)),
+                  decoration: InputDecoration(
+                    labelText: 'color',
+                    labelStyle: TextStyle(color: Colors.grey.withOpacity(0.9)),
+                    filled: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.grey.withOpacity(0.3),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+                  ),
+                  validator: (value) {
+                    if (value?.isEmpty ?? false) {
+                      return 'Please enter a color';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _color = value;
+                  },
                 ),
-                validator: (value) {
-                  if (value?.isEmpty ?? false) {
-                    return 'Please enter an occasion';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _occasion = value;
-                },
-              ),
-              SizedBox(height: 10.0),
-              IconButton(onPressed: () async{
+                const SizedBox(
+                  height: 9,
+                ),
+                TextFormField(
+                  style: TextStyle(color: Colors.grey.withOpacity(0.9)),
+                  decoration: InputDecoration(
+                    labelText: 'occasion',
+                    labelStyle: TextStyle(color: Colors.grey.withOpacity(0.9)),
+                    filled: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.grey.withOpacity(0.3),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+                  ),
+                  validator: (value) {
+                    if (value?.isEmpty ?? false) {
+                      return 'Please enter an occasion';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _occasion = value;
+                  },
+                ),
+                SizedBox(height: 8.0),
+                IconButton(onPressed: () async{
 
-                ImagePicker imagePicker=ImagePicker();
-                XFile? file=await imagePicker.pickImage(source: ImageSource.camera );
-                print(file?.path);
-                if(file?.path==null) return;
-                String filename=DateTime.now().microsecondsSinceEpoch.toString();
-                Reference referenceRoot=FirebaseStorage.instance.ref();
-                Reference referenceDir=referenceRoot.child('images');
-                Reference referenceuploadimage=referenceDir.child(filename);
-               try{
-                 await referenceuploadimage.putFile(File(file!.path));
-                 imageUrl=await referenceuploadimage.getDownloadURL();
-                 ScaffoldMessenger.of(context).showSnackBar(
-                     SnackBar(content: Text('image uploaded'),));
+                  ImagePicker imagePicker=ImagePicker();
+                  XFile? file=await imagePicker.pickImage(source: ImageSource.camera );
+                  print(file?.path);
+                  if(file?.path==null) return;
+                  String filename=DateTime.now().microsecondsSinceEpoch.toString();
+                  Reference referenceRoot=FirebaseStorage.instance.ref();
+                  Reference referenceDir=referenceRoot.child('images');
+                  Reference referenceuploadimage=referenceDir.child(filename);
+                 try{
+                   await referenceuploadimage.putFile(File(file!.path));
+                   imageUrl=await referenceuploadimage.getDownloadURL();
+                   ScaffoldMessenger.of(context).showSnackBar(
+                       SnackBar(content: Text('image uploaded'),));
 
-               }catch(e){
-                   print(e.toString());
-               }
+                 }catch(e){
+                     print(e.toString());
+                 }
 
 
 
-              }, icon: Icon(Icons.camera_alt)),
-              SizedBox(height: 10,),
-              ElevatedButton(
-                onPressed: () {
-                  if(imageUrl.isEmpty){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('please upload an image'),));
-                    return;
-                  }
-                  if (_formKey.currentState?.validate() ?? false) {
-                    _formKey.currentState?.save();
-                   Createvete(
-                       color: _color.toString(),
-                       type: _type.toString(),
-                       occasion: _occasion.toString(),
-                       image: imageUrl,
-                   );
-                  }
-                  Navigator.pop(context);
-                },
-                child: Text('Submit'),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith((states) {
-                      if (states.contains(MaterialState.pressed)) {
-                        return Colors.grey;
-                      }
-                      return Colors.purple;
-                    }),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
-              ),
+                }, icon: Icon(Icons.camera_alt)),
+                SizedBox(height: 7,),
+                ElevatedButton(
+                  onPressed: () {
+                    if(imageUrl.isEmpty){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('please upload an image'),));
+                      return;
+                    }
+                    if (_formKey.currentState?.validate() ?? false) {
+                      _formKey.currentState?.save();
+                     Createvete(
+                         color: _color.toString(),
+                         type: _type.toString(),
+                         occasion: _occasion.toString(),
+                         image: imageUrl,
+                     );
+                    }
+                    Navigator.pop(context);
+                  },
+                  child: Text('Submit'),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith((states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          return Colors.grey;
+                        }
+                        return Colors.purple;
+                      }),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+                ),
 
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
 
   }
   Future Createvete({required String color ,required String type ,required String occasion,required String image}) async{
