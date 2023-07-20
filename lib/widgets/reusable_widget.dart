@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/item_details.dart';
+import '../utils/color_utils.dart';
 
 Image logoWidget(String imageName) {
   return Image.asset(
@@ -89,8 +91,9 @@ Container Customcard(BuildContext context,Map<dynamic,dynamic> item){
                  '${item['image']}',height: 70,width: 70,) : Container(),
              title: Text('${item['type']}'),
              subtitle: Text('${item['occasion']}'),
-             onTap:(){ Navigator.of(context).push(MaterialPageRoute(
-                 builder: (context) => ItemDetails(item['id'])));}
+             onTap:(){
+               Navigator.of(context).pushNamed('/itemdetails',arguments: item['id'].toString());
+               },
            ),
          ),
 

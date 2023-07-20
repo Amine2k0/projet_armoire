@@ -55,10 +55,10 @@ class ItemList extends StatelessWidget {
               element['email'] == user?.email &&
                   element['categorie'] == 'shoes')
                   .toList();
-              //Display the list
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 10,),
                     Row(children: [Text('Top',style: TextStyle(fontSize: 30)),
                       SizedBox(width: 5,),Icon(Icons.next_plan)],),
                     SizedBox(height: 10,),
@@ -69,9 +69,7 @@ class ItemList extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: itemsT.length,
                           itemBuilder: (BuildContext context, int index) {
-                            //Get the item at this index
                             Map thisItem = itemsT[index];
-                            //REturn the widget for the list items
                             return Customcard(context, thisItem);
 
                           }),
@@ -88,10 +86,8 @@ class ItemList extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: itemsB.length,
                           itemBuilder: (BuildContext context, int index) {
-                            //Get the item at this index
+
                             Map thisItem = itemsB[index];
-                            //REturn the widget for the list items
-                            //if(thisItem['categorie']=='top')
                             return Customcard(context,thisItem);
 
                           }),
@@ -110,10 +106,7 @@ class ItemList extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: itemsS.length,
                           itemBuilder: (BuildContext context, int index) {
-                            //Get the item at this index
                             Map thisItem = itemsS[index];
-                            //REturn the widget for the list items
-                            //if(thisItem['categorie']=='top')
                             return Customcard(context, thisItem);
                           }),
                     ),
