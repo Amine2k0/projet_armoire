@@ -168,14 +168,15 @@ class _MyFormState extends State<MyForm> {
 
   }
   Future Createvete({required String color ,required String type ,required String occasion,required String image}) async{
-    final docvet = FirebaseFirestore.instance.collection('vetements').doc();
+    String docname=DateTime.now().microsecondsSinceEpoch.toString();
+    final docvet = FirebaseFirestore.instance.collection('vetements').doc(docname);
     final data={
       'couleur': color,
       'email':user,
       'type':type,
       'occasion':occasion,
       'image':image,
-
+      'id':docname,
     };
     await docvet.set(data);
 
