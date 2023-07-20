@@ -1,3 +1,4 @@
+import 'package:arm/widgets/reusable_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -55,32 +56,35 @@ class ItemList extends StatelessWidget {
                   element['categorie'] == 'shoes')
                   .toList();
               //Display the list
-              return SingleChildScrollView(
-                child: Column(
-                    children: [
-                      Center(child: Text('--------------Top--------------',style: TextStyle(fontSize: 30),),),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: itemsT.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          //Get the item at this index
-                          Map thisItem = itemsT[index];
-                          //REturn the widget for the list items
-                          return GFListTile(
-                            avatar: Container(
-                              height: 80,
-                              width: 80,
-                              child: thisItem.containsKey('image') ? Image
-                                  .network(
-                                  '${thisItem['image']}') : Container(),
-                            ),
-                            title: Text('${thisItem['type']}'),
-                            description: Text('${thisItem['occasion']}'),
-                          );
-                        }),
-                      Center(child: Text('------------Bottom-------------',style: TextStyle(fontSize: 30),),),
+              return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [Text('Top',style: TextStyle(fontSize: 30)),
+                      SizedBox(width: 5,),Icon(Icons.next_plan)],),
+                    SizedBox(height: 10,),
+                    Container(
+                      height: 110,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: itemsT.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            //Get the item at this index
+                            Map thisItem = itemsT[index];
+                            //REturn the widget for the list items
+                            return Customcard(context, thisItem);
 
-                      ListView.builder(
+                          }),
+                    ),
+                    SizedBox(height: 30,),
+
+                    Row(children: [Text('Bottom',style: TextStyle(fontSize: 30)),
+                      SizedBox(width: 5,),Icon(Icons.next_plan)],),
+                    SizedBox(height: 10,),
+                    Container(
+                      height: 110,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemCount: itemsB.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -88,20 +92,21 @@ class ItemList extends StatelessWidget {
                             Map thisItem = itemsB[index];
                             //REturn the widget for the list items
                             //if(thisItem['categorie']=='top')
-                            return GFListTile(
-                              avatar: Container(
-                                height: 80,
-                                width: 80,
-                                child: thisItem.containsKey('image') ? Image
-                                    .network(
-                                    '${thisItem['image']}') : Container(),
-                              ),
-                              title: Text('${thisItem['type']}'),
-                               description: Text('${thisItem['occasion']}'),
-                            );
+                            return Customcard(context,thisItem);
+
                           }),
-                      Center(child: Text('------------Shoes-------------',style: TextStyle(fontSize: 30),),),
-                      ListView.builder(
+                    ),
+                    SizedBox(height: 30,),
+
+                    Row(
+                      children: [Text('Shoes',style: TextStyle(fontSize: 30),),
+                        SizedBox(width: 5,),
+                        Icon(Icons.next_plan)],),
+                    SizedBox(height: 10,),
+                    Container(
+                      height: 110,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemCount: itemsS.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -109,22 +114,10 @@ class ItemList extends StatelessWidget {
                             Map thisItem = itemsS[index];
                             //REturn the widget for the list items
                             //if(thisItem['categorie']=='top')
-                            return GFListTile(
-                              avatar: Container(
-                                height: 80,
-                                width: 80,
-                                child: thisItem.containsKey('image') ? Image
-                                    .network(
-                                    '${thisItem['image']}') : Container(),
-                              ),
-                              title: Text('${thisItem['type']}'),
-                            description: Text('${thisItem['occasion']}'),
-                            );
+                            return Customcard(context, thisItem);
                           }),
-
-
-                    ]
-                ),
+                    ),
+                  ]
               );
             }
             return Center(child: CircularProgressIndicator());

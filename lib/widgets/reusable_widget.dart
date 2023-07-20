@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/item_details.dart';
+
 Image logoWidget(String imageName) {
   return Image.asset(
     imageName,
@@ -65,4 +67,35 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
     ),
   );
+}
+
+
+Container Customcard(BuildContext context,Map<dynamic,dynamic> item){
+ return Container(
+   child: Card(
+     shape: RoundedRectangleBorder(
+       borderRadius: BorderRadius.circular(15.0),
+     ),
+     color: Colors.grey,
+     elevation: 10,
+     child:
+         Container(
+           width: 160,
+           padding: EdgeInsets.only(top: 15),
+           child: ListTile(
+             contentPadding: EdgeInsets.only(left: 5),
+             leading: item.containsKey('image') ? Image
+                 .network(
+                 '${item['image']}',height: 70,width: 70,) : Container(),
+             title: Text('${item['type']}'),
+             subtitle: Text('${item['occasion']}'),
+             onTap:(){ Navigator.of(context).push(MaterialPageRoute(
+                 builder: (context) => ItemDetails(item['id'])));}
+           ),
+         ),
+
+         ),
+ );
+
+
 }

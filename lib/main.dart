@@ -1,5 +1,6 @@
 
 import 'package:arm/pages/ajouter.dart';
+import 'package:arm/pages/item_details.dart';
 import 'package:arm/pages/verif.dart';
 import 'package:flutter/material.dart';
 import 'package:arm/pages/home.dart';
@@ -21,6 +22,7 @@ void main(){
       '/home':(context)=>home(),
       '/listevetements':(context)=>ItemList(),
       '/ajouter':(context)=>MyForm(),
+      //'item_details':(context)=>ItemDetails(),
     },
 
   ));

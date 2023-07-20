@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 class ItemDetails extends StatelessWidget {
   ItemDetails(this.itemId, {Key? key}) : super(key: key) {
     _reference =
-        FirebaseFirestore.instance.collection('shopping_list').doc(itemId);
+        FirebaseFirestore.instance.collection('vetements').doc(itemId);
     _futureData = _reference.get();
   }
+
 
   String itemId;
   late DocumentReference _reference;
@@ -50,8 +51,10 @@ class ItemDetails extends StatelessWidget {
             //display the data
             return Column(
               children: [
-                Text('${data['name']}'),
-                Text('${data['quantity']}'),
+                Text('${data['nom']}'),
+                Text('${data['occasion']}'),
+                Text('${data['type']}')
+
               ],
             );
           }
