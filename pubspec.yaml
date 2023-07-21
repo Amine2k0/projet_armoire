@@ -42,6 +42,10 @@ dependencies:
   cloud_firestore: ^4.8.3
   firebase_storage: ^11.2.5
   getwidget: ^3.1.1
+  weather: ^3.1.0
+  http: ^1.1.0
+  carousel_slider: ^4.2.1
+  flutter_image_slideshow: ^0.1.6
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +70,12 @@ flutter:
   uses-material-design: true
 
   assets:
-     - assets/images/logo.png
+     - assets/logo.png
+     - assets/Beach.png
+     - assets/Casual.png
+     - assets/Office.png
+     - assets/Sport.png
+     - assets/Travel.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

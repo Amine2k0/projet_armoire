@@ -1,127 +1,78 @@
-import 'package:arm/pages/login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:arm/pages/listevetements.dart';
+import 'package:arm/pages/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:arm/pages/Weather.dart';
+import 'package:arm/pages/navbar.dart';
+import 'package:arm/pages/image_caroussel.dart';
 
+import 'homeclass.dart';
 
-
-
-class home extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  State<home> createState() => _homeState();
+  State<Home> createState() => _HomeState();
 }
 
+class _HomeState extends State<Home> {
+  static  List<Widget> _pages = <Widget>[
+    Homef(),
+    ItemList(),
+    Profil(),
+  ];
+  int _selectedIndex = 0;
 
-class _homeState extends State<home> {
-  List<XFile>img=[];
-  List<String> clothes = [];
-  String nom='';
-  void addClothes() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Ajouter des vêtements'),
-          content: TextField(
-            onChanged: (value) {
-              setState(() {
-                nom=value;
-              });
 
-            },
-            decoration: InputDecoration(hintText: "Nom du vêtement"),
-          ),
-          actions: [
-            TextButton(
-              child: Text('Ajouter'),
-              onPressed: () {
-                clothes.add(nom);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
-  int _selectindex=0;
-
-  void _in(int index){
-    setState(() {
-      _selectindex=index;
-    });
-
-  }
     return Scaffold(
-      backgroundColor: Colors.cyan[200],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Armoire'),
+        title: Text('Hello @Ndc'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.cyan[200],
+        backgroundColor: Colors.grey[700],
       ),
-      drawer: const NavigationDrawer(),
-      body:
-      Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+      drawer: Navbar(),
+      body: _pages.elementAt(_selectedIndex),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[700],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: BottomNavigationBar(
+          selectedItemColor: Colors.lightBlueAccent,
+          unselectedItemColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconSize: 35,
 
-            ElevatedButton(onPressed: addClothes, child:Text('Ajouter',style: TextStyle(letterSpacing: 1,fontSize: 30),)),
-            SizedBox(height: 10,),
-            ElevatedButton(
-              onPressed: (){Navigator.pushNamed(context, '/listevetements',arguments: clothes);},
-              child:Text('Afficher',style:TextStyle(letterSpacing: 1,fontSize: 30))),
-            SizedBox(height: 10,),
-            ElevatedButton(
-                onPressed: () async{
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                      SignInScreen()), (Route<dynamic> route) => false);
-                },
-                child:Text('log out',style:TextStyle(letterSpacing: 1,fontSize: 30))),
-
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag),
+              label: 'Vêtements',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              label: 'Profil',
+            ),
           ],
-    ),
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        ),
       ),
-
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
-        backgroundColor: Colors.cyan[200],
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.checkroom_outlined),
-            label: 'Closet',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Profil',
-          ),
-
-
-        ],
-        currentIndex: _selectindex,
-        onTap: _in,
-      ),
-      );
-
-
-  }
-}
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer();
+    );
   }
 }

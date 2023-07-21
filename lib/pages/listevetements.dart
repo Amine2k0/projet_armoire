@@ -22,9 +22,9 @@ class ItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text('Items'),
-      ),
+      ),*/
       body: StreamBuilder<QuerySnapshot>(
           stream: _stream,
           builder: (BuildContext context, AsyncSnapshot snapshot) {

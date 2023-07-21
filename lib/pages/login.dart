@@ -35,7 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 20, MediaQuery.of(context).size.height * 0.2, 20, 0),
             child: Column(
               children: <Widget>[
-                logoWidget("assets/images/logo.png"),
+                logoWidget("assets/logo.png"),
                 const SizedBox(
                   height: 30,
                 ),
@@ -57,7 +57,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         password: _passwordTextController.text)
                         .then((value) {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => home()));
+                          MaterialPageRoute(builder: (context) => Home()));
                    }).onError((error, stackTrace) async {
                      await showerror(context, error.toString());
                     });

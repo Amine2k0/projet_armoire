@@ -53,7 +53,7 @@ class homepage extends StatelessWidget {
               else{
                 return SignInScreen();
               }
-             return home();
+             return Home();
 
             default:
               return const CircularProgressIndicator();

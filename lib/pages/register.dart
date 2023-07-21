@@ -95,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ville: _VilleController.text,
                             email: _emailTextController.text);
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => home()));
+                            MaterialPageRoute(builder: (context) => Home()));
                       }).onError((error, stackTrace) async {
                         await showerror(context, error.toString());
                       });
