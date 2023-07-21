@@ -1,5 +1,7 @@
 import 'package:arm/pages/listevetements.dart';
 import 'package:arm/pages/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:arm/pages/Weather.dart';
@@ -53,7 +55,7 @@ class _HomeState extends State<Home> {
           unselectedItemColor: Colors.white,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconSize: 35,
+          iconSize: 25,
 
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -74,5 +76,14 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+  Future<Text> getName () async {
+    String username='';
+    final usermail=FirebaseAuth.instance.currentUser?.email;
+    await FirebaseFirestore.instance.collection('users').doc(usermail).get()
+        .then<dynamic>((DocumentSnapshot snapshot) async{
+          username=snapshot.get('nom');
+    });
+    return Text('Hello {$username}');
   }
 }
