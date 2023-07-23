@@ -8,6 +8,7 @@ import 'package:arm/pages/Weather.dart';
 import 'package:arm/pages/navbar.dart';
 import 'package:arm/pages/image_caroussel.dart';
 
+import '../utils/color_utils.dart';
 import 'homeclass.dart';
 
 class Home extends StatefulWidget {
@@ -44,14 +45,20 @@ class _HomeState extends State<Home> {
       body: _pages.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[700],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
+            gradient: LinearGradient(colors: [
+              hexStringToColor("CB2B93"),
+              hexStringToColor("9546C4"),
+              hexStringToColor("5E61F4")
+            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        //decoration: BoxDecoration(
+          //color: Colors.grey[700],
+          //borderRadius: BorderRadius.only(
+           // topLeft: Radius.circular(20),
+            //topRight: Radius.circular(20),
+
+
         child: BottomNavigationBar(
-          selectedItemColor: Colors.lightBlueAccent,
+          selectedItemColor: Colors.black,
           unselectedItemColor: Colors.white,
           backgroundColor: Colors.transparent,
           elevation: 0,

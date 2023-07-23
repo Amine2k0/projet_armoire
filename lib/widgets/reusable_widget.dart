@@ -84,6 +84,13 @@ Container Customcard(BuildContext context,Map<dynamic,dynamic> item){
          Container(
            width: 160,
            padding: EdgeInsets.only(top: 15),
+           decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(20),
+               gradient: LinearGradient(colors: [
+                 hexStringToColor("CB2B93"),
+                 hexStringToColor("9546C4"),
+                 hexStringToColor("5E61F4")
+               ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
            child: ListTile(
              contentPadding: EdgeInsets.only(left: 5),
              leading: item.containsKey('image') ? Image

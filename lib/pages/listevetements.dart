@@ -6,6 +6,8 @@ import 'package:arm/pages/item_details.dart';
 import 'package:arm/pages/ajouter.dart';
 import 'package:getwidget/getwidget.dart';
 
+import '../utils/color_utils.dart';
+
 class ItemList extends StatelessWidget {
   ItemList({Key? key}) : super(key: key) {
     _stream = _reference.snapshots();
@@ -55,62 +57,97 @@ class ItemList extends StatelessWidget {
               element['email'] == user?.email &&
                   element['categorie'] == 'shoes')
                   .toList();
-              return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10,),
-                    Row(children: [Text('Top',style: TextStyle(fontSize: 30)),
-                      SizedBox(width: 5,),Icon(Icons.next_plan)],),
-                    SizedBox(height: 10,),
-                    Container(
-                      height: 110,
-                      child: ListView.builder(
+              return Container(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10,),
+                      Container(
+                        margin: EdgeInsets.only(right: 308,left: 15),
+                        padding: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            gradient: LinearGradient(colors: [
+                              hexStringToColor("CB2B93"),
+                              hexStringToColor("9546C4"),
+                              hexStringToColor("5E61F4")
+                            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                        child: Row(children: [Text('Top',style: TextStyle(fontSize: 30)),
+                          SizedBox(width: 5,),Text('>',style: TextStyle(fontSize:30 ),)],),
+                      ),
+                      SizedBox(height: 10,),
+                      Container(
+                        height: 110,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: itemsT.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Map thisItem = itemsT[index];
+                              return Customcard(context, thisItem);
+
+                            }),
+                      ),
+                      SizedBox(height: 20,),
+
+                      Container(
+                        margin: EdgeInsets.only(right: 260,left: 15),
+                        padding: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            gradient: LinearGradient(colors: [
+                              hexStringToColor("CB2B93"),
+                              hexStringToColor("9546C4"),
+                              hexStringToColor("5E61F4")
+                            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                        child: Row(children: [Text('Bottom',style: TextStyle(fontSize: 30)),
+                          SizedBox(width: 5,),Text('>',style: TextStyle(fontSize:30 ))],),
+                      ),
+                      SizedBox(height: 10,),
+                      Container(
+                        height: 110,
+                        child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: itemsT.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Map thisItem = itemsT[index];
-                            return Customcard(context, thisItem);
+                            shrinkWrap: true,
+                            itemCount: itemsB.length,
+                            itemBuilder: (BuildContext context, int index) {
 
-                          }),
-                    ),
-                    SizedBox(height: 30,),
+                              Map thisItem = itemsB[index];
+                              return Customcard(context,thisItem);
 
-                    Row(children: [Text('Bottom',style: TextStyle(fontSize: 30)),
-                      SizedBox(width: 5,),Icon(Icons.next_plan)],),
-                    SizedBox(height: 10,),
-                    Container(
-                      height: 110,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: itemsB.length,
-                          itemBuilder: (BuildContext context, int index) {
+                            }),
+                      ),
+                      SizedBox(height: 20,),
 
-                            Map thisItem = itemsB[index];
-                            return Customcard(context,thisItem);
-
-                          }),
-                    ),
-                    SizedBox(height: 30,),
-
-                    Row(
-                      children: [Text('Shoes',style: TextStyle(fontSize: 30),),
-                        SizedBox(width: 5,),
-                        Icon(Icons.next_plan)],),
-                    SizedBox(height: 10,),
-                    Container(
-                      height: 110,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: itemsS.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Map thisItem = itemsS[index];
-                            return Customcard(context, thisItem);
-                          }),
-                    ),
-                  ]
+                      Container(
+                        margin: EdgeInsets.only(right: 275,left: 15),
+                        padding: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            gradient: LinearGradient(colors: [
+                              hexStringToColor("CB2B93"),
+                              hexStringToColor("9546C4"),
+                              hexStringToColor("5E61F4")
+                            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                        child: Row(
+                          children: [Text('Shoes',style: TextStyle(fontSize: 30),),
+                            SizedBox(width: 5,),
+                            Text('>',style: TextStyle(fontSize:30 ),)],),
+                      ),
+                      SizedBox(height: 10,),
+                      Container(
+                        height: 110,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: itemsS.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Map thisItem = itemsS[index];
+                              return Customcard(context, thisItem);
+                            }),
+                      ),
+                    ]
+                ),
               );
             }
             return Center(child: CircularProgressIndicator());
@@ -126,6 +163,7 @@ class ItemList extends StatelessWidget {
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+        backgroundColor: Colors.purple,
       ),
     );
   }

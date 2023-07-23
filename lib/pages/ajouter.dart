@@ -16,9 +16,12 @@ class _MyFormState extends State<MyForm> {
   final _formKey = GlobalKey<FormState>();
   String? _type='';
   String? _color='';
-  String? _occasion='';
   final user=FirebaseAuth.instance.currentUser?.email;
   String imageUrl='';
+  String? _occasion='';
+  void drop(String? selectedValue){if(selectedValue is String){setState(() {
+            _occasion=selectedValue;
+  });}}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +108,17 @@ class _MyFormState extends State<MyForm> {
                     _occasion = value;
                   },
                 ),
+                /*DropdownButton<String>(
+                    items: [
+                      DropdownMenuItem(child: Text('sport'),),
+                      DropdownMenuItem(child: Text('beach')),
+                      DropdownMenuItem(child: Text('casual')),
+                      DropdownMenuItem(child: Text('office')),
+                      DropdownMenuItem(child: Text('travel')),
+                              ],
+                    value: _occasion,
+                    onChanged: drop,
+                ),*/
                 SizedBox(height: 8.0),
                 IconButton(onPressed: () async{
 
