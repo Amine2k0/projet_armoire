@@ -58,6 +58,7 @@ class ItemList extends StatelessWidget {
                   element['categorie'] == 'shoes')
                   .toList();
               return Container(
+                decoration: BoxDecoration(color: Color(0xFFf2ece1),),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,15 +66,12 @@ class ItemList extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: 308,left: 15),
                         padding: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: LinearGradient(colors: [
-                              hexStringToColor("CB2B93"),
-                              hexStringToColor("9546C4"),
-                              hexStringToColor("5E61F4")
-                            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-                        child: Row(children: [Text('Top',style: TextStyle(fontSize: 30)),
-                          SizedBox(width: 5,),Text('>',style: TextStyle(fontSize:30 ),)],),
+                        decoration: BoxDecoration(color: Color(0xFF016571),
+                        borderRadius: BorderRadius.circular(20)),
+                        child: Row(children: [Text('Top',
+                            style: TextStyle(fontSize: 30,color: Colors.white)),
+                          SizedBox(width: 5,),Text('>',
+                            style: TextStyle(fontSize:30 ,color: Colors.white),)],),
                       ),
                       SizedBox(height: 10,),
                       Container(
@@ -93,15 +91,10 @@ class ItemList extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: 260,left: 15),
                         padding: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: LinearGradient(colors: [
-                              hexStringToColor("CB2B93"),
-                              hexStringToColor("9546C4"),
-                              hexStringToColor("5E61F4")
-                            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-                        child: Row(children: [Text('Bottom',style: TextStyle(fontSize: 30)),
-                          SizedBox(width: 5,),Text('>',style: TextStyle(fontSize:30 ))],),
+                          decoration: BoxDecoration(color: Color(0xFF016571),
+                              borderRadius: BorderRadius.circular(20)),
+                        child: Row(children: [Text('Bottom',style: TextStyle(fontSize: 30,color: Colors.white)),
+                          SizedBox(width: 5,),Text('>',style: TextStyle(fontSize:30,color: Colors.white ))],),
                       ),
                       SizedBox(height: 10,),
                       Container(
@@ -122,17 +115,12 @@ class ItemList extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: 275,left: 15),
                         padding: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: LinearGradient(colors: [
-                              hexStringToColor("CB2B93"),
-                              hexStringToColor("9546C4"),
-                              hexStringToColor("5E61F4")
-                            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                        decoration: BoxDecoration(color: Color(0xFF016571),
+                            borderRadius: BorderRadius.circular(20)),
                         child: Row(
-                          children: [Text('Shoes',style: TextStyle(fontSize: 30),),
+                          children: [Text('Shoes',style: TextStyle(fontSize: 30,color: Colors.white),),
                             SizedBox(width: 5,),
-                            Text('>',style: TextStyle(fontSize:30 ),)],),
+                            Text('>',style: TextStyle(fontSize:30 ,color: Colors.white),)],),
                       ),
                       SizedBox(height: 10,),
                       Container(
@@ -163,7 +151,7 @@ class ItemList extends StatelessWidget {
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-        backgroundColor: Colors.purple,
+        backgroundColor: Color(0xFF016571),
       ),
     );
   }

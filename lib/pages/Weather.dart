@@ -42,9 +42,12 @@ class weather extends StatelessWidget {
           } else {
             final weatherData = snapshot.data;
             final temperature = weatherData?['main']?['temp'];
-            return Align(
-              alignment: Alignment.topCenter,
-              child: Text('Temperature : $temperature°C' , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+            return Container(
+              decoration: BoxDecoration(color: Color(0xFF016571)),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text('Temperature : $temperature°C' , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+              ),
             );
           }
         },

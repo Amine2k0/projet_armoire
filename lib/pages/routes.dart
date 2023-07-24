@@ -1,10 +1,13 @@
 import 'package:arm/pages/Weather.dart';
+import 'package:arm/pages/account.dart';
 import 'package:arm/pages/ajouter.dart';
 import 'package:arm/pages/image_caroussel.dart';
 import 'package:arm/pages/item_details.dart';
 import 'package:arm/pages/listevetements.dart';
 import 'package:arm/pages/login.dart';
 import 'package:arm/pages/navbar.dart';
+import 'package:arm/pages/outfit.dart';
+import 'package:arm/pages/profile.dart';
 import 'package:arm/pages/register.dart';
 import 'package:flutter/material.dart';
 import 'package:arm/main.dart';
@@ -27,6 +30,9 @@ class MyRoutes{
       case'/weather': return MaterialPageRoute(builder: (context)=>weather());
       case'/image': return MaterialPageRoute(builder: (context)=>ImageCarousel());
       case'/navbar': return MaterialPageRoute(builder: (context)=>Navbar());
+      case'/profile': return MaterialPageRoute(builder:(context)=>Profil());
+      case'/account': return MaterialPageRoute(builder:(context)=>AccountInfoPage(email: arg, username: arg, password: arg));
+      case'/outfit': return MaterialPageRoute(builder:(context)=>OutfitPage());
       
     }
     return MaterialPageRoute(builder: (_){

@@ -34,22 +34,17 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFf2ece1),
       appBar: AppBar(
         title: Text('Hello @Ndc'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Color(0xFF016571),
       ),
       drawer: Navbar(),
       body: _pages.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              hexStringToColor("CB2B93"),
-              hexStringToColor("9546C4"),
-              hexStringToColor("5E61F4")
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+
         //decoration: BoxDecoration(
           //color: Colors.grey[700],
           //borderRadius: BorderRadius.only(
@@ -58,9 +53,9 @@ class _HomeState extends State<Home> {
 
 
         child: BottomNavigationBar(
-          selectedItemColor: Colors.black,
+          selectedItemColor: Colors.brown[200],
           unselectedItemColor: Colors.white,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color(0xFF016571),
           elevation: 0,
           iconSize: 25,
 

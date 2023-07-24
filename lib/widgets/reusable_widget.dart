@@ -84,20 +84,17 @@ Container Customcard(BuildContext context,Map<dynamic,dynamic> item){
          Container(
            width: 160,
            padding: EdgeInsets.only(top: 15),
-           decoration: BoxDecoration(
-               borderRadius: BorderRadius.circular(20),
-               gradient: LinearGradient(colors: [
-                 hexStringToColor("CB2B93"),
-                 hexStringToColor("9546C4"),
-                 hexStringToColor("5E61F4")
-               ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+           decoration: BoxDecoration(color: Color(0xFF016571),
+               borderRadius: BorderRadius.circular(20)),
            child: ListTile(
              contentPadding: EdgeInsets.only(left: 5),
              leading: item.containsKey('image') ? Image
                  .network(
                  '${item['image']}',height: 70,width: 70,) : Container(),
-             title: Text('${item['type']}'),
-             subtitle: Text('${item['occasion']}'),
+             title: Text('${item['type']}',
+               style: TextStyle(color: Colors.white,fontSize: 17),),
+             subtitle: Text('${item['occasion']}'
+                 ,style: TextStyle(color: Colors.white,fontSize: 17)),
              onTap:(){
                Navigator.of(context).pushNamed('/itemdetails',arguments: item['id'].toString());
                },
