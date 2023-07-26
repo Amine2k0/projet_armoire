@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   image_picker: ^1.0.0
   sqflite: ^2.0.2+1
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -76,6 +77,8 @@ flutter:
      - assets/Office.png
      - assets/Sport.png
      - assets/Travel.png
+     - assets/nightweather.jpg
+     - assets/dayweather.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

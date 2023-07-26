@@ -17,35 +17,39 @@ class _HomefState extends State<Homef> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+      child: Column(
 
-        children: [
-          Align(
+          children: [
+            Align(
 
-            alignment: Alignment.topCenter, //
-            child: Container(
+              alignment: Alignment.topCenter, //
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.all(0),
+                height: 150,
+                width: 300,
+                child: weather(),
+              ),
 
-              height: 30,
-              child: weather(),
             ),
+            SizedBox(height: 15),
+            Text(
+              'Je veux une tenue pour...',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Choisissez l\'occasion qui convient le mieux à votre journée.',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 15),
+            Container(
 
-          ),
-          SizedBox(height: 15),
-          Text(
-            'Je veux une tenue pour...',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            'Choisissez l\'occasion qui convient le mieux à votre journée.',
-            style: TextStyle(fontSize: 16),
-          ),
-          SizedBox(height: 15),
-          Container(
+              child : ImageCarousel(),
 
-            child : ImageCarousel(),
-
-          ),
-        ],
-      );
+            ),
+          ],
+        ),
+    );
   }
 }

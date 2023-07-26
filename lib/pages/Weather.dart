@@ -6,6 +6,8 @@ import 'package:arm/pages/home.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+
 
 
 
@@ -27,6 +29,7 @@ Future<Map<String, dynamic>> getWeatherData(String apiKey ) async {
 }
 class weather extends StatelessWidget {
   final String apiKey = '7bbccf8220846f49f8b3cbb9ab028454';
+  final time=DateTime.now().toUtc();
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +45,37 @@ class weather extends StatelessWidget {
           } else {
             final weatherData = snapshot.data;
             final temperature = weatherData?['main']?['temp'];
-            return Container(
-              decoration: BoxDecoration(color: Color(0xFF016571)),
+            int hours=int.parse(DateFormat.H().format(time));
+            print(hours);
+            if(hours > 6 && hours <20)
+              return Container(
+              decoration:BoxDecoration(
+                  image:DecorationImage(image: AssetImage("assets/dayweather.jpg"),fit:BoxFit.cover),
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Color(0xFF016571),width: 2)
+              ),
               child: Align(
-                alignment: Alignment.topCenter,
+                alignment: Alignment.center,
                 child: Text('Temperature : $temperature°C' , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
               ),
             );
+            else
+              return Container(
+                decoration:BoxDecoration(
+                    image:DecorationImage(image: AssetImage("assets/nightweather.jpg"),fit:BoxFit.cover),
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(color: Color(0xFF016571),width: 2)
+                ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text('Temperature : $temperature°C' , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                ),
+              );
+
           }
         },
       ),
     );
+
   }
 }
