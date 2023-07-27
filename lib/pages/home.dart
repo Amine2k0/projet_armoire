@@ -16,7 +16,19 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+Future<String> getnom() async{
+  final user= await FirebaseAuth.instance.currentUser?.email;
+  String nom='';
+  await FirebaseFirestore.instance.collection('users').doc(user)
+      .get().then<dynamic>((DocumentSnapshot snapshot)async {
+    nom=snapshot.get('nom');
+  } );
+
+  return nom;
+}
+
 class _HomeState extends State<Home> {
+  final nom=getnom();
   static  List<Widget> _pages = <Widget>[
     Homef(),
     ItemList(),
@@ -35,14 +47,51 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFf2ece1),
-      appBar: AppBar(
-        title: Text('Hello @Ndc'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Color(0xFF016571),
+      // appBar: AppBar(
+      //   title: Text('Hello @Ndc'),
+      //   centerTitle: true,
+      //   elevation: 0,
+      //   backgroundColor: Color(0xFF016571),
+      // ),
+      //drawer: Navbar(),
+      body:SingleChildScrollView(
+        child: SafeArea(child:Column(children: [
+          FutureBuilder<String>(
+            future: getnom(),
+            builder: (
+                BuildContext context,
+                AsyncSnapshot<String> snapshot,
+                ) {
+              print(snapshot.connectionState);
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  return  Container(
+                    height: 100,
+                    width: 100,
+                    child:
+                    Center(child:
+                    Text('Hi ${snapshot.data}'),),
+                    decoration: BoxDecoration(color:Color(0xFF016571),border: Border.all(color: Color(0xFF016571),width: 2),
+                        borderRadius: BorderRadius.circular(20)),
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          ),
+
+            _pages.elementAt(_selectedIndex) ,
+
+
+        ],)),
       ),
-      drawer: Navbar(),
-      body: _pages.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
 
         //decoration: BoxDecoration(
@@ -79,13 +128,5 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Future<Text> getName () async {
-    String username='';
-    final usermail=FirebaseAuth.instance.currentUser?.email;
-    await FirebaseFirestore.instance.collection('users').doc(usermail).get()
-        .then<dynamic>((DocumentSnapshot snapshot) async{
-          username=snapshot.get('nom');
-    });
-    return Text('Hello {$username}');
-  }
+
 }

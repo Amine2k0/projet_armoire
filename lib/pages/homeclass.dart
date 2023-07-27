@@ -1,5 +1,7 @@
 import 'package:arm/pages/listevetements.dart';
 import 'package:arm/pages/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:arm/pages/Weather.dart';
@@ -11,10 +13,8 @@ class Homef extends StatefulWidget {
   State<Homef> createState() => _HomefState();
 }
 
+
 class _HomefState extends State<Homef> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,7 +22,6 @@ class _HomefState extends State<Homef> {
 
           children: [
             Align(
-
               alignment: Alignment.topCenter, //
               child: Container(
                 margin: EdgeInsets.only(top: 20),
